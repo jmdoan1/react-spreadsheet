@@ -56,5 +56,6 @@ jspm_packages/
 
 # Compiled
 
-dist/
+# TODO: Undo and delete dist folder before PR
+# dist/
 reference/
