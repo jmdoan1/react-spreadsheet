@@ -1421,7 +1421,7 @@ var Cell = function (_a) {
     }
     return (React.createElement("td", { ref: rootRef, className: classNames("Spreadsheet__cell", data === null || data === void 0 ? void 0 : data.className, {
             "Spreadsheet__cell--readonly": data === null || data === void 0 ? void 0 : data.readOnly,
-        }), onMouseOver: handleMouseOver, onMouseDown: handleMouseDown, tabIndex: 0 },
+        }), onMouseOver: handleMouseOver, onMouseDown: handleMouseDown, tabIndex: 0, rowSpan: data === null || data === void 0 ? void 0 : data.rowSpan, colSpan: data === null || data === void 0 ? void 0 : data.colSpan },
         React.createElement(DataViewer, { row: row, column: column, cell: data, formulaParser: formulaParser, setCellData: setCellData })));
 };
 var enhance = function (CellComponent) {

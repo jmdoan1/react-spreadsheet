@@ -32,6 +32,10 @@ declare type CellBase<Value = any> = {
     DataEditor?: DataEditorComponent<CellBase<Value>>;
     /** Custom component to render when the cell is viewed, if not defined would default to the component defined for the Spreadsheet */
     DataViewer?: DataViewerComponent<CellBase<Value>>;
+    /** The number of rows the cell should span. Defaults to 1 */
+    rowSpan?: number;
+    /** The number of columns the cell should span. Defaults to 1 */
+    colSpan?: number;
 };
 /**
  * A cell with it's coordinates
