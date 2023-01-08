@@ -400,8 +400,10 @@ function getRowsCount(matrix) {
 }
 function getColumnsCountForRow(row) {
     return row.reduce(function (a, b) {
-        var span = Number(Object(b).colSpan);
-        return Number.isNaN(span) ? a + 1 : a + span;
+        console.log("(Object(b) as CellBase).colSpan", Object(b).colSpan);
+        var span = Object(b).colSpan || 1;
+        console.log("span", span);
+        return a + span;
     }, 0);
 }
 /** Gets the count of columns of given matrix */

@@ -203,8 +203,13 @@ export function getRowsCount(matrix: Matrix<unknown>): number {
 
 function getColumnsCountForRow(row: unknown[]): number {
   return row.reduce<number>((a, b) => {
-    const span = Number(Object(b).colSpan);
-    return Number.isNaN(span) ? a + 1 : a + span;
+    console.log(
+      "(Object(b) as CellBase).colSpan",
+      (Object(b) as CellBase).colSpan
+    );
+    const span: number = (Object(b) as CellBase).colSpan || 1;
+    console.log("span", span);
+    return a + span;
   }, 0);
 }
 
