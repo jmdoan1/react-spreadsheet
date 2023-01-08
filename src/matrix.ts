@@ -1,4 +1,5 @@
 import * as Point from "./point";
+import { CellBase } from "./types";
 
 /** A two-dimensional array of given type T in rows and columns */
 export type Matrix<T> = Array<Array<T | undefined>>;
@@ -200,9 +201,23 @@ export function getRowsCount(matrix: Matrix<unknown>): number {
   return matrix.length;
 }
 
+function getColumnsCountForRow(row: unknown[]): number {
+  let length = row.length;
+  row.forEach((cell) => {
+    const span = Number(Object(cell).colSpan);
+    if (!Number.isNaN(span) && span > 1) {
+      length = length + (span - 1);
+    }
+  });
+  return length;
+}
+
 /** Gets the count of columns of given matrix */
 export function getColumnsCount(matrix: Matrix<unknown>): number {
-  const firstRow = matrix[0];
+  const rowsBySize = [...matrix].sort(
+    (a, b) => getColumnsCountForRow(b) - getColumnsCountForRow(a)
+  );
+  const firstRow = rowsBySize[0];
   return firstRow ? firstRow.length : 0;
 }
 

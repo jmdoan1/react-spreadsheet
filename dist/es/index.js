@@ -368,9 +368,20 @@ function getSize(matrix) {
 function getRowsCount(matrix) {
     return matrix.length;
 }
+function getColumnsCountForRow(row) {
+    var length = row.length;
+    row.forEach(function (cell) {
+        var span = Number(Object(cell).colSpan);
+        if (!Number.isNaN(span) && span > 1) {
+            length = length + (span - 1);
+        }
+    });
+    return length;
+}
 /** Gets the count of columns of given matrix */
 function getColumnsCount(matrix) {
-    var firstRow = matrix[0];
+    var rowsBySize = __spreadArray([], __read(matrix)).sort(function (a, b) { return getColumnsCountForRow(b) - getColumnsCountForRow(a); });
+    var firstRow = rowsBySize[0];
     return firstRow ? firstRow.length : 0;
 }
 /**

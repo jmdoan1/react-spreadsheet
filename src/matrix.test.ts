@@ -32,7 +32,7 @@ describe("Matrix.getSize()", () => {
   test("Gives columns and rows", () => {
     expect(Matrix.getSize(EXAMPLE_MATRIX)).toEqual({ rows: 3, columns: 3 });
   });
-  test("Relies on first row for columns", () => {
+  test("Calculates colums based on longest row", () => {
     expect(
       Matrix.getSize([
         [1, 2, 3, 4],
@@ -49,7 +49,7 @@ describe("Matrix.getSize()", () => {
       ])
     ).toEqual({
       rows: 2,
-      columns: 3,
+      columns: 4,
     });
   });
 });
