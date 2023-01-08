@@ -399,19 +399,14 @@ function getRowsCount(matrix) {
     return matrix.length;
 }
 function getColumnsCountForRow(row) {
-    var length = row.length;
-    row.forEach(function (cell) {
-        var span = Number(Object(cell).colSpan);
-        if (!Number.isNaN(span) && span > 1) {
-            length = length + (span - 1);
-        }
-    });
-    return length;
+    return row.reduce(function (a, b) {
+        var span = Number(Object(b).colSpan);
+        return Number.isNaN(span) ? a + 1 : a + span;
+    }, 0);
 }
 /** Gets the count of columns of given matrix */
 function getColumnsCount(matrix) {
-    var rowsBySize = __spreadArray([], __read(matrix)).sort(function (a, b) { return getColumnsCountForRow(b) - getColumnsCountForRow(a); });
-    var firstRow = rowsBySize[0];
+    var firstRow = __spreadArray([], __read(matrix)).sort(function (a, b) { return getColumnsCountForRow(b) - getColumnsCountForRow(a); })[0];
     return firstRow ? firstRow.length : 0;
 }
 /**

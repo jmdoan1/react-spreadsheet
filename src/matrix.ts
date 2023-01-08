@@ -202,22 +202,17 @@ export function getRowsCount(matrix: Matrix<unknown>): number {
 }
 
 function getColumnsCountForRow(row: unknown[]): number {
-  let length = row.length;
-  row.forEach((cell) => {
-    const span = Number(Object(cell).colSpan);
-    if (!Number.isNaN(span) && span > 1) {
-      length = length + (span - 1);
-    }
-  });
-  return length;
+  return row.reduce<number>((a, b) => {
+    const span = Number(Object(b).colSpan);
+    return Number.isNaN(span) ? a + 1 : a + span;
+  }, 0);
 }
 
 /** Gets the count of columns of given matrix */
 export function getColumnsCount(matrix: Matrix<unknown>): number {
-  const rowsBySize = [...matrix].sort(
+  const firstRow = [...matrix].sort(
     (a, b) => getColumnsCountForRow(b) - getColumnsCountForRow(a)
-  );
-  const firstRow = rowsBySize[0];
+  )[0];
   return firstRow ? firstRow.length : 0;
 }
 
