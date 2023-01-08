@@ -370,9 +370,7 @@ function getRowsCount(matrix) {
 }
 function getColumnsCountForRow(row) {
     return row.reduce(function (a, b) {
-        console.log("(Object(b) as CellBase).colSpan", Object(b).colSpan);
         var span = Object(b).colSpan || 1;
-        console.log("span", span);
         return a + span;
     }, 0);
 }
