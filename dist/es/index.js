@@ -376,8 +376,8 @@ function getColumnsCount(matrix) {
         row.forEach(function (cell) {
             var obj = Object(cell);
             length =
-                "colSpan" in obj && typeof obj["colSpan"] === "number"
-                    ? length + obj["colSpan"]
+                "colSpan" in obj && typeof obj.colSpan === "number"
+                    ? length + obj.colspan
                     : length + 1;
         });
         result = Math.max(length, result);
