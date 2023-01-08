@@ -202,8 +202,19 @@ export function getRowsCount(matrix: Matrix<unknown>): number {
 
 /** Gets the count of columns of given matrix */
 export function getColumnsCount(matrix: Matrix<unknown>): number {
-  const firstRow = matrix[0];
-  return firstRow ? firstRow.length : 0;
+  let result = 0;
+  matrix.forEach((row) => {
+    let length = 0;
+    row.forEach((cell) => {
+      const obj = Object(cell);
+      length =
+        "colSpan" in obj && typeof obj.colSpan === "number"
+          ? length + obj.colspan
+          : length + 1;
+    });
+    result = Math.max(length, result);
+  });
+  return result;
 }
 
 /**

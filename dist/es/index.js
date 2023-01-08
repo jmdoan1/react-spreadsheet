@@ -370,8 +370,19 @@ function getRowsCount(matrix) {
 }
 /** Gets the count of columns of given matrix */
 function getColumnsCount(matrix) {
-    var firstRow = matrix[0];
-    return firstRow ? firstRow.length : 0;
+    var result = 0;
+    matrix.forEach(function (row) {
+        var length = 0;
+        row.forEach(function (cell) {
+            var obj = Object(cell);
+            length =
+                "colSpan" in obj && typeof obj.colSpan === "number"
+                    ? length + obj.colspan
+                    : length + 1;
+        });
+        result = Math.max(length, result);
+    });
+    return result;
 }
 /**
  * Pads matrix with empty columns to match given total columns
